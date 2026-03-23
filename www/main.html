@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School App - Main Interface</title>
+    <style>
+        /* Keep all original UI styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: #007bff;
+            color: white;
+        }
+        .favorites-section {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .school-item {
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn-favorite {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .favorites-list {
+            margin-top: 10px;
+        }
+        .error-msg {
+            color: red;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Original UI + New Header (Logout + Favorites) -->
+    <div class="header">
+        <h3>Welcome, <span id="usernameDisplay"></span></h3>
+        <button onclick="logoutUser()">Logout</button>
+    </div>
+
+    <!-- Original UI Content (keep all existing elements) -->
+    <div id="original-ui">
+        <h4>Original School App Features</h4>
+        <!-- Add your existing UI elements here -->
+        <div class="school-list">
+            <!-- Example school item with favorite button -->
+            <div class="school-item">
+                <div>
+                    <h5>Harvard University</h5>
+                    <p>Cambridge, Massachusetts, USA</p>
+                </div>
+                <button class="btn-favorite" onclick="addFavorite('Harvard University', 'Cambridge, Massachusetts, USA')">Add to Favorites</button>
+            </div>
+            <div class="school-item">
+                <div>
+                    <h5>Stanford University</h5>
+                    <p>Stanford, California, USA</p>
+                </div>
+                <button class="btn-favorite" onclick="addFavorite('Stanford University', 'Stanford, California, USA')">Add to Favorites</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Favorites Section -->
+    <div class="favorites-section">
+        <h4>My Favorite Schools</h4>
+        <button onclick="loadFavorites()">Refresh Favorites</button>
+        <div class="error-msg" id="favoriteError"></div>
+        <div class="favorites-list" id="favoritesList"></div>
+    </div>
+
+    <!-- Include Cordova, DB Logic -->
+    <script src="cordova.js"></script>
+    <script src="db.js"></script>
+    <script>
+        /**
+         * Main UI logic (original features + favorites)
+         */
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check login state (redirect to login if not logged in)
+            const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+            const currentUsername = localStorage.getItem("currentUsername");
+            if (!isLoggedIn || !currentUsername) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            // Display current username
+            document.getElementById("usernameDisplay").textContent = currentUsername;
+
+            // Load favorites on page load
+            loadFavorites();
+        });
+
+        /**
+         * Add school to favorites (wrapper for db.js function)
+         * @param {string} name - School name
+         * @param {string} address - School address
+         */
+        async function addFavorite(name, address) {
+            const favoriteError = document.getElementById("favoriteError");
+            favoriteError.textContent = "";
+            try {
+                const message = await addFavoriteSchool(name, address);
+                alert(message);
+                loadFavorites(); // Refresh list after add
+            } catch (error) {
+                favoriteError.textContent = error;
+            }
+        }
+
+        /**
+         * Load and render favorite schools
+         */
+        async function loadFavorites() {
+            const favoritesList = document.getElementById("favoritesList");
+            const favoriteError = document.getElementById("favoriteError");
+            favoritesList.innerHTML = "";
+            favoriteError.textContent = "";
+
+            try {
+                const favorites = await getFavoriteSchools();
+                if (favorites.length === 0) {
+                    favoritesList.innerHTML = "<p>No favorite schools yet.</p>";
+                    return;
+                }
+
+                // Render favorite items
+                favorites.forEach(fav => {
+                    const item = document.createElement("div");
+                    item.className = "school-item";
+                    item.innerHTML = `
+                        <div>
+                            <h5>${fav.school_name}</h5>
+                            <p>${fav.school_address || "No address provided"}</p>
+                            <small>Favorited on: ${new Date(fav.favorite_time).toLocaleString()}</small>
+                        </div>
+                        <button class="btn-remove" onclick="removeFavorite(${fav.id})">Remove</button>
+                    `;
+                    favoritesList.appendChild(item);
+                });
+            } catch (error) {
+                favoriteError.textContent = error;
+            }
+        }
+
+        /**
+         * Remove favorite school (wrapper for db.js function)
+         * @param {number} favId - Favorite record ID
+         */
+        async function removeFavorite(favId) {
+            const favoriteError = document.getElementById("favoriteError");
+            favoriteError.textContent = "";
+            try {
+                const message = await removeFavoriteSchool(favId);
+                alert(message);
+                loadFavorites(); // Refresh list after remove
+            } catch (error) {
+                favoriteError.textContent = error;
+            }
+        }
+    </script>
+</body>
+</html>

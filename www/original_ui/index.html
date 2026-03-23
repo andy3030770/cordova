@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Critical meta tag for mobile adaptive layout -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Info Application</title>
+  <!-- Link global style sheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <button onclick="backToCordovaUI()">Back to login page to add your favourite university</button>
+  <div class="container">
+    <!-- Main app title -->
+    <h1>University Information Application</h1>
+    <!-- Feature 1 entrance: jump to HK universities list page -->
+    <button class="home-btn" onclick="window.location.href='page1.html'">1. Show All Hong Kong Universities</button>
+    <!-- Feature 2 entrance: jump to random university page -->
+    <button class="home-btn" onclick="window.location.href='page2.html'">2. Get Random University</button>
+    <!-- Feature 3 entrance: jump to name search page -->
+    <button class="home-btn" onclick="window.location.href='page3.html'">3. Search University by Name</button>
+    <!-- Feature 4 entrance: jump to open website page -->
+    <button class="home-btn" onclick="window.location.href='page4.html'">4. Open Official Website</button>
+    <!-- Feature 5 entrance: jump to count by country page -->
+    <button class="home-btn" onclick="window.location.href='page5.html'">5. Count Universities by Region</button>
+  </div>
+  <!-- Load global data (only load once) -->
+  <script src="js/app.js"></script>
+  <!-- www/original_ui/index.html 中添加 -->
+
+
+<script>
+function backToCordovaUI() {
+    window.location.href = '../index.html';
+}
+</script>
+</body>
+</html>

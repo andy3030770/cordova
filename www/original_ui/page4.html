@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Official Website</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Feature 4 title -->
+    <h2>Open University Official Website</h2>
+    <!-- Input box for university name -->
+    <input type="text" id="webSearchInput" class="input-box" placeholder="Enter a full name of the university name ">
+    <!-- Open website button -->
+    <button class="action-btn" id="openWebBtn">Open Official Website</button>
+    <!-- Result/feedback display area (success/error tip) -->
+    <div id="webResultTip"></div>
+    <!-- Back to home page button -->
+    <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+  </div>
+  <!-- Load global data first, then feature 4 logic -->
+  <script src="js/app.js"></script>
+  <script src="js/page4.js"></script>
+</body>
+</html>

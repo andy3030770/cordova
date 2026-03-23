@@ -1,0 +1,165 @@
+/* Global reset: remove default browser styles for consistency */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body base style: light background for mobile app */
+body {
+  background-color: #f5f7fa;
+  padding: 15px;
+  min-height: 100vh;
+}
+
+/* Container: adaptive width, center align for mobile (max 480px) */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Main title (home page) */
+h1 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+/* Sub page title (feature pages) */
+h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Home page buttons: large, easy to click on mobile */
+.home-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: #007aff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.home-btn:hover {
+  background-color: #0066cc;
+}
+
+/* Input box (search/count pages): adaptive, mobile-friendly */
+
+.input-box {
+  width: 100%;
+  min-height: 45px; 
+  max-height: 200px; 
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.5; 
+  resize: none; 
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+  overflow-y: auto; 
+  box-sizing: border-box;
+}
+
+/* Action button (search/count/open): full width for mobile */
+.action-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #007aff;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #0066cc;
+}
+
+/* Result card: rich info display with shadow for layering */
+.result-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* List item (HK list/search result): separate card for each university */
+.list-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Label: bold for info category (e.g., University Name) */
+.label {
+  font-weight: bold;
+  color: #222;
+  font-size: 14px;
+}
+
+/* Content: normal text for info value (e.g., City University of Hong Kong) */
+.content {
+  color: #666;
+  font-size: 15px;
+  margin: 4px 0 10px 0;
+}
+
+/* Back button: unified style for all sub pages, back to home */
+.back-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #007aff;
+  border-radius: 10px;
+  background-color: white;
+  color: #007aff;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.back-btn:hover {
+  background-color: #f0f7ff;
+}
+
+/* Empty tip: show when no result found (centered, light gray) */
+.empty-tip {
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+/* Official website link: blue, underline on hover */
+.web-link {
+  color: #007aff;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.web-link:hover {
+  text-decoration: underline;
+}
+
+/* Count result: highlight number for visibility */
+.count-num {
+  color: #007aff;
+  font-weight: bold;
+  font-size: 18px;
+}
